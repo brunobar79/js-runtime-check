@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Status Checker</title>
+    <style>
+        .js-disabled {
+            color: red;
+            font-weight: bold;
+        }
+        .js-enabled {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Status Checker</h1>
+    <p id="status" class="js-disabled">JavaScript is disabled.</p>
+
+    <!-- Displayed only if JavaScript is disabled or gets disabled -->
+    <noscript>
+        <p class="js-disabled">JavaScript is disabled.</p>
+    </noscript>
+
+    <script>
+        function checkJavaScript() {
+            const statusElement = document.getElementById('status');
+            statusElement.textContent = "JavaScript is enabled.";
+            statusElement.className = "js-enabled";
+            window.ReactNativeWebView.postMessage(JSON.stringify({jsEnabled: true, url: document.location.href }));
+        }
+
+        // Check JavaScript status every 5 seconds
+        setInterval(checkJavaScript, 5000);
+
+        // Initial check when the page loads
+        checkJavaScript();
+    </script>
+</body>
+</html>
