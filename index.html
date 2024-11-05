@@ -26,10 +26,16 @@
 
     <script>
         function checkJavaScript() {
-            const statusElement = document.getElementById('status');
-            statusElement.textContent = "JavaScript is enabled.";
-            statusElement.className = "js-enabled";
-            window.ReactNativeWebView.postMessage(JSON.stringify({jsEnabled: true, url: document.location.href }));
+            try {
+                const statusElement = document.getElementById('status');
+                statusElement.textContent = "JavaScript is enabled.";
+                statusElement.className = "js-enabled";
+                const data = {jsEnabled: true, url: document.location.href };
+                console.log(data);
+                window.ReactNativeWebView.postMessage(JSON.stringify(data));
+            } catch(e){
+                console.log('js check failed', e);
+            }
         }
 
         // Check JavaScript status every 5 seconds
