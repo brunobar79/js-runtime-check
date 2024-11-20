@@ -30,17 +30,17 @@
                 const statusElement = document.getElementById('status');
                 statusElement.textContent = "JavaScript is enabled.";
                 statusElement.className = "js-enabled";
-                const data = {jsEnabled: true, url: document.location.href };
+                const data = { jsEnabled: true, url: document.location.href };
                 console.log(data);
                 window.ReactNativeWebView.postMessage(JSON.stringify(data));
-            } catch(e){
-                console.log('js check failed', e);
+            } catch (e) {
+                console.log('JS check failed', e);
+            } finally {
+                // Schedule the next execution after 5 seconds
+                setTimeout(checkJavaScript, 5000);
             }
         }
-
-        // Check JavaScript status every 5 seconds
-        setInterval(checkJavaScript, 5000);
-
+        
         // Initial check when the page loads
         checkJavaScript();
     </script>
